@@ -5,20 +5,19 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;
 import org.openapitools.model.DTO.DocumentDTO;
+import org.openapitools.model.DTO.NoteDTO;
 import org.openapitools.persistance.dtoRepo.*;
 import org.openapitools.persistance.entity.AuthUser;
 import org.openapitools.persistance.entity.Document;
 import org.openapitools.persistance.entity.Note;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.openapitools.persistance.dtoRepo.*;
 
 import java.time.OffsetDateTime;
-import java.time.format.DateTimeFormatter;
 
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING,
         unmappedTargetPolicy = ReportingPolicy.IGNORE,
         nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-public abstract class Notes implements MapperMain<Note, DocumentDTO> {
+public abstract class Notes implements MapperMain<Note, NoteDTO> {
     //TODO: dto fertig programmieren
     @Autowired
     private DocumentRepository documentRepository;
@@ -35,11 +34,11 @@ public abstract class Notes implements MapperMain<Note, DocumentDTO> {
 
     @Mapping(target = "document", source = "document", qualifiedByName = "dtoDocument")
     @Mapping(target = "user", source = "user", qualifiedByName = "DtoUser")
-    abstract public Note dtoToEntity(DocumentDTO documentDTO);
+    abstract public Note dtoToEntity(NoteDTO documentDTO);
 
     @Mapping(target = "document", source = "document", qualifiedByName = "entityDocument")
     @Mapping(target = "user",source = "user", qualifiedByName = "entityUser")
-    abstract public DocumentDTO entityToDto(Note noteEntity);
+    abstract public NoteDTO entityToDto(Note noteEntity);
 
 
     @Named("entityDocument")

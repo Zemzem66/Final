@@ -3,7 +3,7 @@ package org.openapitools.mapper;
 import org.mapstruct.Mapper;
 import org.mapstruct.*;
 import org.openapitools.model.DTO.DocumentDTO;
-import org.openapitools.model.DTO.GetDocument200ResponsePermissions;
+import org.openapitools.model.DTO.NoteDTO;
 import org.openapitools.persistance.dtoRepo.*;
 import org.openapitools.persistance.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,23 +38,29 @@ public abstract class GetDocument implements MapperMain<Document, DocumentDTO>{
 
 
     @Mapping(target = "correspondent", source = "correspondent", qualifiedByName = "correspondentDto")
-    @Mapping(target = "documentType", source = "document", qualifiedByName = "documentTypeDto")
+    @Mapping(target = "documentType", source = "documentType", qualifiedByName = "documentTypeDto")
     @Mapping(target = "storagePath", source = "storagePath", qualifiedByName = "storagePathDto")
     @Mapping(target = "documentTagsEntities", source = "tags", qualifiedByName = "tagsDto")
     @Mapping(target = "archiveSerialNumber", source = "archiveSerialNumber", qualifiedByName = "archiveSerialNumberDto")
-    @Mapping(target = "owner", source = "user", qualifiedByName = "ownerDto")
-   // @Mapping(target = "documentNoteEntities", source = "notes", qualifiedByName = "notesDto")
+    @Mapping(target = "owner", source = "owner", qualifiedByName = "ownerDto")
+    @Mapping(target = "documentNoteEntities", source = "notes", qualifiedByName = "notesDto")
     abstract public Document dtoToEntity(DocumentDTO dto);
 
     @Mapping(target = "correspondent", source = "correspondent", qualifiedByName = "correspondentEntity")
-    @Mapping(target = "document", source = "documentType", qualifiedByName = "documentTypeEntity")
+    @Mapping(target = "documentType", source = "documentType", qualifiedByName = "documentTypeEntity")
     @Mapping(target = "storagePath", source = "storagePath", qualifiedByName = "storagePathEntity")
     @Mapping(target = "tags", source = "documentTagsEntities", qualifiedByName = "tagsEntity")
     @Mapping(target = "createdDate", source = "created")
-    @Mapping(target = "user", source = "owner", qualifiedByName = "ownerEntity")
+    @Mapping(target = "owner", source = "owner", qualifiedByName = "ownerEntity")
    // @Mapping(target = "permissions", source = "owner", qualifiedByName = "permissionsEntity")
-    //@Mapping(target = "notes", source = "documentNoteEntities", qualifiedByName = "notesEntity")
+    @Mapping(target = "notes", source = "documentNoteEntities", qualifiedByName = "notesEntity")
     abstract public DocumentDTO entityToDto(Document entity);
+
+    @Named("notesEntity")
+    List<NoteDTO> mapNotes(Set<Note> notes) {
+        if(notes == null) return null;
+        return notes.stream().map( note->notesMapper.entityToDto(note) ).toList();
+    }
 
     @Named("correspondentEntity")
     Integer map(Correspondent correspondent) {
@@ -87,14 +93,8 @@ public abstract class GetDocument implements MapperMain<Document, DocumentDTO>{
         if(tags == null) return null;
         return tags.stream().map( tag->(int)tag.getId() ).toList();
     }
-    /*
-    @Named("notesEntity")
-    List<DocumentDTO> mapNotes(Set<Note> notes) {
-        if(notes == null) return null;
-        return notes.stream().map( note->notesMapper.entityToDto(note) ).toList();
-    }
 
-     */
+
     OffsetDateTime mapCreatedDate(OffsetDateTime value) {
         return value!=null ? value.withOffsetSameInstant(ZoneOffset.UTC).toLocalDate().atStartOfDay().atOffset(ZoneOffset.UTC) : null;
     }
@@ -140,18 +140,16 @@ public abstract class GetDocument implements MapperMain<Document, DocumentDTO>{
         return Integer.parseInt(value);
     }
 
-    /*
     @Named("notesDto")
-    Set<Note> mapNotes(List<DocumentDTO> value) {
+    Set<Note> mapNotes(List<NoteDTO> value) {
         if(value==null || value.isEmpty()) return null;
 
         HashSet<Note> notes = new HashSet<Note>();
 
-        for(DocumentDTO note : value) {
+        for(NoteDTO note : value) {
             notes.add(notesMapper.dtoToEntity(note));
         }
         return notes;
     }
 
-     */
 }

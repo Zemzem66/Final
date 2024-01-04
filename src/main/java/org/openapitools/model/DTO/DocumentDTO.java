@@ -27,7 +27,7 @@ public class DocumentDTO {
 
   private Integer correspondent;
 
-  private Integer document;
+  private Integer documentType;
 
   private Integer storagePath;
 
@@ -52,14 +52,14 @@ public class DocumentDTO {
 
   private String archivedFileName;
 
-  private Integer user;
+  private Integer owner;
 
   private GetDocument200ResponsePermissions permissions;
 
 
 
   @Valid
-  private List<@Valid GetDocuments200ResponseResultsInnerNotesInner> notes = new ArrayList<>();
+  private List<@Valid NoteDTO> notes = new ArrayList<>();
 
   public DocumentDTO() {
     super();
@@ -68,10 +68,10 @@ public class DocumentDTO {
   /**
    * Constructor with only required parameters
    */
-  public DocumentDTO(Integer id, Integer correspondent, Integer document, Integer storagePath, String title, String note, List<Integer> tags, String created, String createdDate, String modified, String added, Integer archiveSerialNumber, String originalFileName, String archivedFileName, Integer user, GetDocument200ResponsePermissions permissions, List<@Valid GetDocuments200ResponseResultsInnerNotesInner> notes) {
+  public DocumentDTO(Integer id, Integer correspondent, Integer document, Integer storagePath, String title, String note, List<Integer> tags, String created, String createdDate, String modified, String added, Integer archiveSerialNumber, String originalFileName, String archivedFileName, Integer owner, GetDocument200ResponsePermissions permissions, List<@Valid NoteDTO> notes) {
     this.id = id;
     this.correspondent = correspondent;
-    this.document = document;
+    this.documentType = document;
     this.storagePath = storagePath;
     this.title = title;
     this.note = note;
@@ -83,7 +83,7 @@ public class DocumentDTO {
     this.archiveSerialNumber = archiveSerialNumber;
     this.originalFileName = originalFileName;
     this.archivedFileName = archivedFileName;
-    this.user = user;
+    this.owner = owner;
     this.permissions = permissions;
     this.notes = notes;
   }
@@ -129,7 +129,7 @@ public class DocumentDTO {
   }
 
   public DocumentDTO documentType(Integer documentType) {
-    this.document = documentType;
+    this.documentType = documentType;
     return this;
   }
 
@@ -140,12 +140,12 @@ public class DocumentDTO {
   @NotNull 
   @Schema(name = "document_type", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("document_type")
-  public Integer getDocument() {
-    return document;
+  public Integer getDocumentType() {
+    return documentType;
   }
 
-  public void setDocument(Integer document) {
-    this.document = document;
+  public void setDocumentType(Integer documentType) {
+    this.documentType = documentType;
   }
 
   public DocumentDTO storagePath(Integer storagePath) {
@@ -377,7 +377,7 @@ public class DocumentDTO {
   }
 
   public DocumentDTO owner(Integer owner) {
-    this.user = owner;
+    this.owner = owner;
     return this;
   }
 
@@ -388,12 +388,12 @@ public class DocumentDTO {
   @NotNull 
   @Schema(name = "owner", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("owner")
-  public Integer getUser() {
-    return user;
+  public Integer getOwner() {
+    return owner;
   }
 
-  public void setUser(Integer user) {
-    this.user = user;
+  public void setOwner(Integer owner) {
+    this.owner = owner;
   }
 
   public DocumentDTO permissions(GetDocument200ResponsePermissions permissions) {
@@ -416,7 +416,7 @@ public class DocumentDTO {
     this.permissions = permissions;
   }
 
-  public DocumentDTO notes(List<@Valid GetDocuments200ResponseResultsInnerNotesInner> notes) {
+  public DocumentDTO notes(List<@Valid NoteDTO> notes) {
     this.notes = notes;
     return this;
   }
@@ -428,7 +428,7 @@ public class DocumentDTO {
   }
 
    */
-  public DocumentDTO addNotesItem(GetDocuments200ResponseResultsInnerNotesInner notesItem) {
+  public DocumentDTO addNotesItem(NoteDTO notesItem) {
     if (this.notes == null) {
       this.notes = new ArrayList<>();
     }
@@ -443,11 +443,11 @@ public class DocumentDTO {
   @NotNull @Valid 
   @Schema(name = "notes", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("notes")
-  public List<@Valid GetDocuments200ResponseResultsInnerNotesInner> getNotes() {
+  public List<@Valid NoteDTO> getNotes() {
     return notes;
   }
 
-  public void setNotes(List<@Valid GetDocuments200ResponseResultsInnerNotesInner> notes) {
+  public void setNotes(List<@Valid NoteDTO> notes) {
     this.notes = notes;
   }
 
@@ -462,7 +462,7 @@ public class DocumentDTO {
     DocumentDTO documentDTO = (DocumentDTO) o;
     return Objects.equals(this.id, documentDTO.id) &&
         Objects.equals(this.correspondent, documentDTO.correspondent) &&
-        Objects.equals(this.document, documentDTO.document) &&
+        Objects.equals(this.documentType, documentDTO.documentType) &&
         Objects.equals(this.storagePath, documentDTO.storagePath) &&
         Objects.equals(this.title, documentDTO.title) &&
         Objects.equals(this.note, documentDTO.note) &&
@@ -474,14 +474,14 @@ public class DocumentDTO {
         Objects.equals(this.archiveSerialNumber, documentDTO.archiveSerialNumber) &&
         Objects.equals(this.originalFileName, documentDTO.originalFileName) &&
         Objects.equals(this.archivedFileName, documentDTO.archivedFileName) &&
-        Objects.equals(this.user, documentDTO.user) &&
+        Objects.equals(this.owner, documentDTO.owner) &&
         Objects.equals(this.permissions, documentDTO.permissions) &&
         Objects.equals(this.notes, documentDTO.notes);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, correspondent, document, storagePath, title, note, tags, created, createdDate, modified, added, archiveSerialNumber, originalFileName, archivedFileName, user, permissions, notes);
+    return Objects.hash(id, correspondent, documentType, storagePath, title, note, tags, created, createdDate, modified, added, archiveSerialNumber, originalFileName, archivedFileName, owner, permissions, notes);
   }
 
   @Override
@@ -490,7 +490,7 @@ public class DocumentDTO {
     sb.append("class GetDocument200Response {\n");
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    correspondent: ").append(toIndentedString(correspondent)).append("\n");
-    sb.append("    documentType: ").append(toIndentedString(document)).append("\n");
+    sb.append("    documentType: ").append(toIndentedString(documentType)).append("\n");
     sb.append("    storagePath: ").append(toIndentedString(storagePath)).append("\n");
     sb.append("    title: ").append(toIndentedString(title)).append("\n");
     sb.append("    content: ").append(toIndentedString(note)).append("\n");
@@ -502,7 +502,7 @@ public class DocumentDTO {
     sb.append("    archiveSerialNumber: ").append(toIndentedString(archiveSerialNumber)).append("\n");
     sb.append("    originalFileName: ").append(toIndentedString(originalFileName)).append("\n");
     sb.append("    archivedFileName: ").append(toIndentedString(archivedFileName)).append("\n");
-    sb.append("    owner: ").append(toIndentedString(user)).append("\n");
+    sb.append("    owner: ").append(toIndentedString(owner)).append("\n");
     sb.append("    permissions: ").append(toIndentedString(permissions)).append("\n");
     sb.append("    notes: ").append(toIndentedString(notes)).append("\n");
     sb.append("}");

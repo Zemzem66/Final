@@ -41,6 +41,7 @@ C:\Users\sahin\Desktop\Final\out\springboot\src\main\java\org\openapitools\model
 C:\Users\sahin\Desktop\Final\out\springboot\src\main\java\org\openapitools\OpenApiGeneratorApplication.java
 C:\Users\sahin\Desktop\Final\out\springboot\src\main\java\org\openapitools\persistance\entity\PaperlessMailMailrule.java
 C:\Users\sahin\Desktop\Final\out\springboot\src\main\java\org\openapitools\model\DTO\GetDocument200ResponsePermissions.java
+C:\Users\sahin\Desktop\Final\out\springboot\src\main\java\org\openapitools\model\DTO\NoteDTO.java
 C:\Users\sahin\Desktop\Final\out\springboot\src\main\java\org\openapitools\model\GetStoragePaths200ResponseResultsInnerPermissionsView.java
 C:\Users\sahin\Desktop\Final\out\springboot\src\main\java\org\openapitools\persistance\dtoRepo\AuthUserGroupsRepository.java
 C:\Users\sahin\Desktop\Final\out\springboot\src\main\java\org\openapitools\persistance\entity\Savedviewfilterrule.java
@@ -105,6 +106,7 @@ C:\Users\sahin\Desktop\Final\out\springboot\src\main\java\org\openapitools\model
 C:\Users\sahin\Desktop\Final\out\springboot\src\main\java\org\openapitools\model\DocTag.java
 C:\Users\sahin\Desktop\Final\out\springboot\src\main\java\org\openapitools\model\GetDocument200ResponsePermissionsView.java
 C:\Users\sahin\Desktop\Final\out\springboot\src\main\java\org\openapitools\model\UpdateCorrespondent200Response.java
+C:\Users\sahin\Desktop\Final\out\springboot\src\main\java\org\openapitools\mapper\ViewPermission.java
 C:\Users\sahin\Desktop\Final\out\springboot\src\main\java\org\openapitools\model\CreateDocumentType200Response.java
 C:\Users\sahin\Desktop\Final\out\springboot\src\main\java\org\openapitools\model\CreateStoragePathRequest.java
 C:\Users\sahin\Desktop\Final\out\springboot\src\main\java\org\openapitools\persistance\entity\AuthGroupPermissions.java

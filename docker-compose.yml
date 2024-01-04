@@ -14,3 +14,16 @@ services:
       dockerfile: Dockerfile
     ports:
       - "8088:8088"
+    #depends_on:
+     # postgres:
+      #  condition: service_started
+
+  postgres:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: paperless
+      POSTGRES_PASSWORD: 123456
+      POSTGRES_DB: swkom
+    ports:
+      - "5432:5432"
+
